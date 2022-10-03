@@ -7,11 +7,10 @@ import (
 	"github.com/google/tink/go/keyset"
 )
 
-
 func Generate() *keyset.Handle {
 	kh, err := keyset.NewHandle(aead.AES128GCMKeyTemplate())
 	if err != nil {
-	  log.Fatal(err)
+		log.Fatal(err)
 	}
 	return kh
 }

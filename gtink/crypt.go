@@ -3,20 +3,19 @@ package gtink
 import (
 	"github.com/google/tink/go/aead"
 	"github.com/google/tink/go/keyset"
-	"github.com/google/tink/go/tink"
 )
 
+func Encrypt(kh *keyset.Handle, msg string, hint string) []byte {
 
-func Encrypt(kh *keyset.Handle, msg string, hint string) ([]byte, tink.AEAD) {
-
-	a,_:= aead.New(kh)
+	a, _ := aead.New(kh)
 	ct, _ := a.Encrypt([]byte(msg), []byte(hint))
 
-	return ct, a
+	return ct
 }
 
-func Decrypt(a tink.AEAD, encryptText string, hint string) ([]byte) {
+func Decrypt(kh *keyset.Handle, encryptText string, hint string) []byte {
 
+	a, _ := aead.New(kh)
 	pt, _ := a.Decrypt([]byte(encryptText), []byte(hint))
 
 	return pt

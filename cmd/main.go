@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	msg string = "Exploring gtink"
+	msg  string = "Exploring gtink"
 	hint string = "this is a test"
 )
 
@@ -17,11 +17,10 @@ func main() {
 	keyset := gtink.Generate()
 	fmt.Println(keyset)
 
+	fmt.Printf("Message: %s\nAssociated data: %s\n", msg, hint)
 
-	fmt.Printf("Message: %s\nAssociated data: %s\n", msg,hint)
-
-	ct, a := gtink.Encrypt(keyset, msg, hint)
-	pt := gtink.Decrypt(a, string(ct), hint)
+	ct := gtink.Encrypt(keyset, msg, hint)
+	pt := gtink.Decrypt(keyset, string(ct), hint)
 
 	fmt.Printf("Cipher text: %x\nPlain text: %s\n\n\n", ct, pt)
 
