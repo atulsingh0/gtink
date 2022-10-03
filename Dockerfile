@@ -1,8 +1,8 @@
-FROM golang:1.18 as build
+FROM golang:1.19 as build
 WORKDIR /build
 COPY . .
 RUN go mod tidy
-RUN CGO_ENABLED=0 go build -o gtink cmd/gtink/*
+RUN CGO_ENABLED=0 go build -o gtink gtink/*
 RUN chgrp 0 gtink && chmod g+X gtink
 
 FROM alpine as cacerts
